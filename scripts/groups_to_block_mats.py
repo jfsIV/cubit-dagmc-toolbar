@@ -1,4 +1,16 @@
+import os
+import sys
+
+filepath = os.path.dirname(os.path.abspath("__file__"))
+print('Adding ' + filepath + ' to path')
+sys.path.append(filepath)
+
 import cubit
+from utils import find_claro
+
+print("Groups to Blocks and Materials")
+
+print(find_claro())
 
 for (name, gid) in cubit.group_names_ids():
     # skip the 'picked' group and other groups
