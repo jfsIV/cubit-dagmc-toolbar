@@ -17,7 +17,7 @@
     <WPythonScriptAction>
       <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/new_dagmc_names.py</filename>
       <UIfilename></UIfilename>
-      <workingdir></workingdir>
+      <workingdir>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts</workingdir>
       <WAction name="Update Material Assignments">
         <icon>/home/pshriwise/repos/cubit-dagmc-toolbar/icons/group_update.png</icon>
         <description>Update legacy DAGMC Material Assignments</description>
@@ -28,7 +28,7 @@
     <WPythonScriptAction>
       <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/groups_to_block_mats.py</filename>
       <UIfilename></UIfilename>
-      <workingdir></workingdir>
+      <workingdir>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts</workingdir>
       <WAction name="Convert DAGMC Group Assignments to Block Assignments">
         <icon>/home/pshriwise/repos/cubit-dagmc-toolbar/icons/block_update.png</icon>
         <description>Convert DAGMC group material assignments to mesh block material assignments.</description>
