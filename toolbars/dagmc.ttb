@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkflowToolbar version="1.0" name="DAGMC" visible="true">
+  <description></description>
+  <WTButton visible="true">
+    <WToolButtonAction>
+      <commands>
+
+</commands>
+      <workingdir></workingdir>
+      <WAction name="DAGMC">
+        <icon>/home/pshriwise/tmp/icons/svalinn.png</icon>
+        <description>DAGMC Toolbar</description>
+      </WAction>
+    </WToolButtonAction>
+  </WTButton>
+  <WTButton visible="true">
+    <WPythonScriptAction>
+      <filename>./scripts/new_dagmc_names.py</filename>
+      <UIfilename></UIfilename>
+      <workingdir></workingdir>
+      <WAction name="Update Material Assignments">
+        <icon>./icons/group_update.png</icon>
+        <description>Update legacy DAGMC Material Assignments</description>
+      </WAction>
+    </WPythonScriptAction>
+  </WTButton>
+  <WTButton visible="true">
+    <WPythonScriptAction>
+      <filename>./scripts/groups_to_block_mats.py</filename>
+      <UIfilename></UIfilename>
+      <workingdir></workingdir>
+      <WAction name="Convert DAGMC Group Assignments to Block Assignments">
+        <icon>./icons/block_update.png</icon>
+        <description>Convert DAGMC group material assignments to mesh block material assignments.</description>
+      </WAction>
+    </WPythonScriptAction>
+  </WTButton>
+</WorkflowToolbar>
