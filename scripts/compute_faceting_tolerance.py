@@ -25,6 +25,7 @@ def compute_tri_surf_dist_err(surface_id=None):
         surface = cubit.surface( sid )
         T = cubit.parse_cubit_list( "tri", f"in surface {sid}" )
         tri_surf_dists = np.zeros(len(T), dtype=np.float64)
+        max_tri_surf_dist = 0.0
         for i, tid in enumerate(T):
             tri_center = np.array(cubit.get_center_point("tri", tid), dtype=np.float64)
             surf_loc = np.array(surface.closest_point_trimmed(tri_center), dtype=np.float64)
@@ -49,7 +50,7 @@ class SurfaceTableWidget(QWidget):
         # Create a table widget
         self.table_widget = QTableWidget()
         self.table_widget.setColumnCount(2)
-        self.table_widget.setHorizontalHeaderLabels(["Surface ID", "Faceting Tolerance"])
+        self.table_widget.setHorizontalHeaderLabels(["Surface ID", "Faceting Approximation"])
 
         self.table_widget.setSelectionBehavior(QTableWidget.SelectRows)
         self.table_widget.selectionModel().selectionChanged.connect(self.selection_changed)
@@ -75,13 +76,13 @@ class SurfaceTableWidget(QWidget):
         layout.addWidget(self.make_line())
 
         # Add a label for reporting the maximum value
-        self.max_label = QLabel("Max Faceting Tolerance: ")
+        self.max_label = QLabel("")
         layout.addWidget(self.max_label)
 
         layout.addWidget(self.make_line())
 
         # Add informational label with styled text
-        info_label = QLabel("The faceting tolerance is the maximum \n allowed distance from any point on a triangle to the analytic CAD surface.")
+        info_label = QLabel("The faceting approximation is the maximum \ndistance (in model units) from any point \non a triangle to the analytic CAD surface.")
         info_label.setFont(QFont("Arial", italic=True))
         info_label.setStyleSheet("color: gray;")
         layout.addWidget(info_label)
@@ -100,9 +101,9 @@ class SurfaceTableWidget(QWidget):
         line.setFrameShadow(QFrame.Sunken)
         return line
 
-    def set_tolerances(self, tolerance_dict):
+    def set_approximations(self, approx_dict):
         self.clear_table()
-        self.populate(tolerance_dict)
+        self.populate(approx_dict)
 
     def clear_table(self):
         self.table_widget.setRowCount(0)
@@ -116,13 +117,13 @@ class SurfaceTableWidget(QWidget):
         else:
             self.table_widget.setItem(row_count, 1, QTableWidgetItem(f'{tolerance:.3e}'))
 
-    def populate(self, tolerance_dict) :
-        for surface_id, tolerance in tolerance_dict.items():
+    def populate(self, approx_dict) :
+        for surface_id, tolerance in approx_dict.items():
             self.add_row(surface_id, tolerance)
 
         try:
-            max_surface = max({k: v for k, v in tolerance_dict.items() if v is not None}, key=tolerance_dict.get)
-            max_tolerance = tolerance_dict[max_surface]
+            max_surface = max({k: v for k, v in approx_dict.items() if v is not None}, key=approx_dict.get)
+            max_tolerance = approx_dict[max_surface]
         except ValueError:
             max_surface = None
             max_tolerance = None
@@ -130,7 +131,7 @@ class SurfaceTableWidget(QWidget):
         if max_tolerance is None:
             self.max_label.setText(f"No Triangles Found")
         else:
-            self.max_label.setText(f"Max Faceting Tolerance: {max_tolerance:.3e} (Surface ID: {max_surface})")
+            self.max_label.setText(f"Max Faceting Approximation: {max_tolerance:.3e} (Surface ID: {max_surface})")
 
     def close(self):
         self.clear_table()
@@ -170,6 +171,6 @@ class SurfaceTableWidget(QWidget):
 if __name__ == "__coreformcubit__":
     surface_table = SurfaceTableWidget()
     surface_ids = sorted(cubit.get_entities("surface"))
-    tolerances = {surface_id: compute_tri_surf_dist_err(surface_id) for surface_id in surface_ids}
-    surface_table.set_tolerances(tolerances)
+    approximations = {surface_id: compute_tri_surf_dist_err(surface_id) for surface_id in surface_ids}
+    surface_table.set_approximations(approximations)
     surface_table.show()
