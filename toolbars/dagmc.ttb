@@ -35,4 +35,15 @@
       </WAction>
     </WPythonScriptAction>
   </WTButton>
+  <WTButton visible="true">
+    <WPythonScriptAction>
+      <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/compute_faceting_tolerance.py</filename>
+      <UIfilename></UIfilename>
+      <workingdir>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts</workingdir>
+      <WAction name="Generate a DAGMC faceting report">
+        <icon>/home/pshriwise/repos/cubit-dagmc-toolbar/icons/svalinn.png</icon>
+        <description>Generates a faceting tolerance report for specified surfaces in the model</description>
+      </WAction>
+    </WPythonScriptAction>
+  </WTButton>
 </WorkflowToolbar>
