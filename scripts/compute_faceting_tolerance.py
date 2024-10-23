@@ -1,8 +1,10 @@
 #!python
 import numpy as np
 
-from PyQt5.QtWidgets import QApplication, QPushButton, QLabel, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget, QScrollArea, QHeaderView, QFrame
+from PyQt5.QtWidgets import QApplication, QPushButton, QLabel, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget, QScrollArea, QHeaderView, QFrame, QMenu
 from PyQt5.QtGui import QFont, QColor
+from PyQt5.QtCore import Qt
+
 
 import cubit
 
@@ -51,6 +53,10 @@ class SurfaceTableWidget(QWidget):
 
         self.table_widget.setSelectionBehavior(QTableWidget.SelectRows)
         self.table_widget.selectionModel().selectionChanged.connect(self.selection_changed)
+
+        self.table_widget.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.table_widget.customContextMenuRequested.connect(self.show_context_menu)
+
 
         # Enable cells to fill table area
         self.table_widget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -114,8 +120,13 @@ class SurfaceTableWidget(QWidget):
         for surface_id, tolerance in tolerance_dict.items():
             self.add_row(surface_id, tolerance)
 
-        max_surface = max(tolerance_dict, key=tolerance_dict.get)
-        max_tolerance = tolerance_dict[max_surface]
+        try:
+            max_surface = max({k: v for k, v in tolerance_dict.items() if v is not None}, key=tolerance_dict.get)
+            max_tolerance = tolerance_dict[max_surface]
+        except ValueError:
+            max_surface = None
+            max_tolerance = None
+
         if max_tolerance is None:
             self.max_label.setText(f"No Triangles Found")
         else:
@@ -132,6 +143,28 @@ class SurfaceTableWidget(QWidget):
         selected_rows = self.table_widget.selectionModel().selectedRows()
         surface_ids = [self.table_widget.item(row.row(), 0).text() for row in selected_rows]
         cubit.cmd(f'select surface {" ".join(surface_ids)}')
+
+    def show_context_menu(self, pos):
+        # Create the context menu
+        menu = QMenu()
+        isolate_action = menu.addAction("Isolate Surface")
+
+        # Get the clicked row
+        index = self.table_widget.indexAt(pos)
+        if index.isValid():
+            row = index.row()
+            surface_id = self.table_widget.item(row, 0).text()
+
+            # Connect action to method
+            isolate_action.triggered.connect(lambda: self.isolate_surface(surface_id))
+
+        # Show the context menu
+        menu.exec(self.table_widget.mapToGlobal(pos))
+
+    def isolate_surface(self, surface_id):
+        cubit.cmd(f'surface all visibility off')
+        cubit.cmd(f'surface {surface_id} visibility on')
+        cubit.cmd(f'zoom surface {surface_id}')
 
 
 if __name__ == "__coreformcubit__":
