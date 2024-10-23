@@ -37,7 +37,7 @@
   </WTButton>
   <WTButton visible="true">
     <WPythonScriptAction>
-      <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/compute_faceting_tolerance.py</filename>
+      <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/approximation_report.py</filename>
       <UIfilename></UIfilename>
       <workingdir>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts</workingdir>
       <WAction name="Generate a DAGMC faceting report">
