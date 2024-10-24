@@ -8,40 +8,40 @@
 </commands>
       <workingdir></workingdir>
       <WAction name="DAGMC">
-        <icon>/home/pshriwise/repos/cubit-dagmc-toolbar/icons/svalinn.png</icon>
+        <icon>@DAGMC_TOOLBAR_LOCATION@/icons/svalinn.png</icon>
         <description>DAGMC Toolbar</description>
       </WAction>
     </WToolButtonAction>
   </WTButton>
   <WTButton visible="true">
     <WPythonScriptAction>
-      <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/new_dagmc_names.py</filename>
+      <filename>@DAGMC_TOOLBAR_LOCATION@/scripts/new_dagmc_names.py</filename>
       <UIfilename></UIfilename>
-      <workingdir>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts</workingdir>
+      <workingdir>@DAGMC_TOOLBAR_LOCATION@/scripts</workingdir>
       <WAction name="Update Material Assignments">
-        <icon>/home/pshriwise/repos/cubit-dagmc-toolbar/icons/group_update.png</icon>
+        <icon>@DAGMC_TOOLBAR_LOCATION@/icons/group_update.png</icon>
         <description>Update legacy DAGMC Material Assignments</description>
       </WAction>
     </WPythonScriptAction>
   </WTButton>
   <WTButton visible="true">
     <WPythonScriptAction>
-      <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/groups_to_block_mats.py</filename>
+      <filename>@DAGMC_TOOLBAR_LOCATION@/scripts/groups_to_block_mats.py</filename>
       <UIfilename></UIfilename>
-      <workingdir>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts</workingdir>
+      <workingdir>@DAGMC_TOOLBAR_LOCATION@/scripts</workingdir>
       <WAction name="Convert DAGMC Group Assignments to Block Assignments">
-        <icon>/home/pshriwise/repos/cubit-dagmc-toolbar/icons/block_update.png</icon>
+        <icon>@DAGMC_TOOLBAR_LOCATION@/icons/block_update.png</icon>
         <description>Convert DAGMC group material assignments to mesh block material assignments.</description>
       </WAction>
     </WPythonScriptAction>
   </WTButton>
   <WTButton visible="true">
     <WPythonScriptAction>
-      <filename>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts/approximation_report.py</filename>
+      <filename>@DAGMC_TOOLBAR_LOCATION@/scripts/approximation_report.py</filename>
       <UIfilename></UIfilename>
-      <workingdir>/home/pshriwise/repos/cubit-dagmc-toolbar/scripts</workingdir>
+      <workingdir>@DAGMC_TOOLBAR_LOCATION@/scripts</workingdir>
       <WAction name="Generate a DAGMC faceting report">
-        <icon>/home/pshriwise/repos/cubit-dagmc-toolbar/icons/report.png</icon>
+        <icon>@DAGMC_TOOLBAR_LOCATION@/icons/report.png</icon>
         <description>Generates a faceting tolerance report for specified surfaces in the model</description>
       </WAction>
     </WPythonScriptAction>
