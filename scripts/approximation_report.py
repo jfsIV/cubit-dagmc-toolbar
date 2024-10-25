@@ -39,6 +39,7 @@ def compute_tri_surf_dist_err(surface_id=None):
 class SurfaceTableWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setWindowFlags(Qt.Window | Qt.WindowStaysOnTopHint)
 
         layout = QVBoxLayout()
         self.setLayout(layout)
