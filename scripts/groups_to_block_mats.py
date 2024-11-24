@@ -61,7 +61,7 @@ def convert_groups_to_blocks(checks):
         cubit.cmd(cmd)
         if len(volumes) != 0:
             vols = " ".join([str(v) for v in volumes])
-            cmd = f'block {block_id} add volume {" ".join(volumes)}'
+            cmd = f'block {block_id} add volume {" ".join(vols)}'
             cubit.cmd(cmd)
         if len(bodies) != 0:
             bods = " ".join([str(b) for b in bodies])
