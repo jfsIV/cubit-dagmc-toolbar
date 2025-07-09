@@ -11,3 +11,5 @@
 
 ## Windows Users
 On machines running Windows, you will only need to change step 2. Instead of running `setup.sh`, run `setup-windows.ps1`. Once you have the repository downloaded and unpacked in your preferred location, right-click `setup-windows.ps1` and then select `Run with PowerShell`. After running this script, return to step 3 in the instructions above.
+
+If you cannot run `setup-windows.ps1`, you might need to change the file permissions. (i) Right click `setup-windows.ps1`, (ii) select "Properties", (iii) under the "General" tab, select "Unblock", and (iv) re-run `setup-windows.ps1`.
